@@ -1,40 +1,48 @@
 import React, { useState } from 'react';
 
+
 function Calculator() {
-    const [input, setInput] = useState('');
+  const [natija, setNatija]= useState("");
+     
+  const add=(number)=>{
+   setNatija(natija+number);
+   console.log(number)
+  }
+  const clear = () => {
+    setNatija("0");
+    
+  };
+  const equal = () => {
+    setNatija(evaluate(natija));
+  };
+  
 
-    const handleClick = (value) => {
-        if (value === 'Clear') {
-            setInput('');
-        } else if (value === '=') {
-            try {
-                setInput(eval(input).toString());
-            } catch {
-                setInput('Error');
-            }
-        } else {
-            setInput(input + value);
-        }
-    };
+  return (
+    <div className="cal">
+      <h1>Nounou Calculator</h1>
+      <div className = "allow">
+          <input type="text" value={natija} readOnly /> </div>
+           <div className="buttons">
+        <button onClick={()=>add("7")}>7</button>
+        <button onClick={()=>add("8")}>8</button>
+        <button onClick={()=>add("9")}>9</button> 
+        <button onClick={()=>add("/")}>/</button> <br />
+        <button onClick={()=>add("4")}>4</button>
+        <button onClick={()=>add("5")}>5</button>
+        <button onClick={()=>add("6")}>6</button>
+        <button onClick={()=>add("*")}>*</button><br />
+        <button onClick={()=>add("1")}>1</button>
+        <button onClick={()=>add("2")}>2</button>
+        <button onClick={()=>add("3")}>3</button>
+        <button onClick={()=>add("-")}>-</button> <br />
+        <button onClick={()=>add("0")}>0</button>
+        <button onClick={()=>add("+")}>+</button> 
+        <button onClick={equal} className ="equal">=</button>
+        <button onClick={clear} className ="clear">C</button><br />
+      </div>
 
-    return (
-        <div className="calculator">
-            <h2>Nounou Calculator</h2>
-            <input type="text" value={input} readOnly />
-            <div className="result">{input}</div>
-            <div className="buttons">
-                {['7','8','9','/','4','5','6','*','1','2','3','-','0','+','=','Clear'].map((btn, i) => (
-                    <button
-                        key={i}
-                        className={btn === '=' ? 'equal' : btn === 'Clear' ? 'clear' : ''}
-                        onClick={() => handleClick(btn)}
-                    >
-                        {btn}
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
+
+    </div>
+  );
 }
-
 export default Calculator;
